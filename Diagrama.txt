@@ -1,0 +1,27 @@
+Diagrama de Relaciones Resultante
+Jerarquía de Dependencias:
+1. dim_sucursales (Tabla base)
+   └── dim_empleados (FK: int_id_sucursal)
+
+2. dim_clientes (Tabla independiente)
+
+3. dim_productos (Tabla independiente)
+
+4. fct_creditos (Tabla central con múltiples FKs)
+   ├── int_id_cliente → dim_clientes
+   ├── int_id_producto → dim_productos  
+   ├── int_id_sucursal → dim_sucursales
+   └── int_id_empleado → dim_empleados
+
+5. fct_pagos (Depende de fct_creditos)
+   └── int_id_credito → fct_creditos
+
+6. fct_cartera_diaria (Múltiples FKs)
+   ├── int_id_credito → fct_creditos
+   ├── int_id_cliente → dim_clientes
+   └── int_id_producto → dim_productos
+
+7. Tablas Lookup (Independientes)
+   ├── lkp_estados_credito
+   ├── lkp_clasificacion_riesgo
+   └── lkp_canales_pago
